@@ -76,7 +76,7 @@ RESETDISK:							; 디스크를 리셋하는 코드의 시작
 	;DL = 01h	2nd floppy disk ( "drive B:" )
 	;DL = 80h	1st hard disk
 	;DL = 81h	2nd hard disk
-	mov dl, 80h
+	mov dl, 00h
 	int 0x13
 	; 에러가 발생하면 에러 처리로 이동
 	jc HANDLEDISKERROR
@@ -107,7 +107,7 @@ READDATA:
 	mov ch, byte [ TRACKNUMBER ]	; 읽을 트랙 번호 설정
 	mov cl, byte [ SECTORNUMBER ]	; 읽을 섹터 번호 설정
 	mov dh, byte [ HEADNUMBER ]		; 읽을 헤드 번호 설정
-	mov dl, 80h						; 읽을 드라비브 번호 (80h=1st hard disk) 설정
+	mov dl, 00h						; 읽을 드라비브 번호 (80h=1st hard disk) 설정
 	int 0x13						; 인터럽트 서비스 수행
 	jc HANDLEDISKERROR				; 에러가 발생했다면 HEADLEDISKERROR로 이동
 
